@@ -14,7 +14,9 @@ fil_lst = ['month', 'day','both']
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
-
+    A valid month can only be passed as three(3) character abbreviation or all
+    A valid day of the week can only be passed as three(3) character abbreviation or all
+    
     Returns:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
@@ -31,10 +33,8 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         try:
-            city = input('Which city\'s data would you love to explore? Chicago, New-York, or Washington: ')
-            if city.lower() in city_lst:
-                city = city.lower() 
-            else:
+            city = input('Which city\'s data would you love to explore? Chicago, New-York, or Washington: ').lower()
+            if city not in city_lst:
                 if(not city.isalpha()):
                     raise TypeError
                 else:
@@ -50,10 +50,8 @@ def get_filters():
     # TO DO: get user input to filter by what Parameters
     while True:
         try:
-            fil_para = input('Would you love to explore Bikeshares data by? month, day, or both: ')
-            if fil_para.lower() in fil_lst:
-                fil_para = fil_para.lower()
-            else:
+            fil_para = input('Would you love to explore Bikeshares data by? month, day, or both: ').lower()
+            if fil_para not in fil_lst:
                 if(not fil_para.isalpha()):
                     raise TypeError
                 else:
@@ -70,10 +68,8 @@ def get_filters():
     if fil_para != 'day':
         while True:
             try:
-                month = input('Which month\'s data would you love to explore? Jan, Feb, Mar, Apr, May, Jun or all: ')
-                if month.lower() in mon_lst:
-                    month = month.lower()
-                else:
+                month = input('Which month\'s data would you love to explore? Jan, Feb, Mar, Apr, May, Jun or all: ').lower()
+                if month not in mon_lst:
                     if(not month.isalpha()):
                         raise TypeError
                     else:
@@ -90,10 +86,8 @@ def get_filters():
     if fil_para != 'month':
         while True:
             try:
-                day = input('Which day\'s data would you love to explore? Mon, Tue, Wed, Thu, Fri, Sat, Sun or all: ')
-                if day.lower() in day_lst:
-                    day = day.lower()
-                else:
+                day = input('Which day\'s data would you love to explore? Mon, Tue, Wed, Thu, Fri, Sat, Sun or all: ').lower()
+                if day not in day_lst:
                     if(not day.isalpha()):
                         raise TypeError
                     else:
@@ -115,6 +109,9 @@ def load_data(city, month, day,fil_para):
     Loads data for the specified city 
     Perform some feature engineering to correct missing values in Gender and Birth Year columns
     and filters by month and day if applicable.
+    
+    Gender and Birth year column is not present on Washington dataset. Hence no analytic information
+    is displayed for those values when analyzing Washington dataset.
 
     Args:
         (str) city - name of the city to analyze
@@ -175,7 +172,9 @@ def load_data(city, month, day,fil_para):
 
 
 def time_stats(df_city,city, month, day,fil_para):
-    """Displays statistics on the most frequent times of travel."""
+    """Displays statistics on the most frequent times of travel.
+       As an enhancement to the template, least frequent times of travel was included
+    """
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
@@ -205,7 +204,9 @@ def time_stats(df_city,city, month, day,fil_para):
 
 
 def station_stats(df_city,city, month, day,fil_para):
-    """Displays statistics on the most popular stations and trip."""
+    """Displays statistics on the most popular stations and trip.
+       Displayed response uses input filter data, hence must be passed
+    """
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
@@ -324,6 +325,7 @@ def display_data(df_city):
     df_city.rename(columns={'Unnamed: 0':'Customer ID'}, inplace=True)
     df_city['Start Time'] = df_city['Start Time'] .astype(str)
     
+    # 
     view_display = input("Would you like to view 5 rows of individual trip data? Enter yes or no?").lower()
     start_loc = 0
     while (view_display == "yes"):
