@@ -259,7 +259,7 @@ def trip_duration_stats(df_city,city, month, day,fil_para):
 
 
     
-def user_stats(df_city,city, month, day,fil_para):   
+def user_stats(df_city, city, month, day, fil_para):   
     """Displays statistics on bikeshare users."""
 
     print('\nCalculating User Stats...\n')
@@ -268,7 +268,6 @@ def user_stats(df_city,city, month, day,fil_para):
     
     # TO DO: Display counts of user types
 
-    #df_k = df_city['User Type'].mode()[0]
     df_k = df_city['User Type'].value_counts()
     df_k = df_k.to_frame()
 
@@ -320,7 +319,7 @@ def display_data(df_city):
     df_city.rename(columns={'Unnamed: 0':'Customer ID'}, inplace=True)
     df_city['Start Time'] = df_city['Start Time'] .astype(str)
     
-    # 
+    # While loop to display 5 rows of datasets to the user
     view_display = input("Would you like to view 5 rows of individual trip data? Enter yes or no?").lower()
     start_loc = 0
     while (view_display == "yes"):
