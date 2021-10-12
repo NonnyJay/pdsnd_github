@@ -33,10 +33,8 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         try:
-            city = input('Which city\'s data would you love to explore? Chicago, New-York, or Washington: ')
-            if city.lower() in city_lst:
-                city = city.lower() 
-            else:
+            city = input('Which city\'s data would you love to explore? Chicago, New-York, or Washington: ').lower()
+            if city not in city_lst:
                 if(not city.isalpha()):
                     raise TypeError
                 else:
@@ -52,10 +50,8 @@ def get_filters():
     # TO DO: get user input to filter by what Parameters
     while True:
         try:
-            fil_para = input('Would you love to explore Bikeshares data by? month, day, or both: ')
-            if fil_para.lower() in fil_lst:
-                fil_para = fil_para.lower()
-            else:
+            fil_para = input('Would you love to explore Bikeshares data by? month, day, or both: ').lower()
+            if fil_para not in fil_lst:
                 if(not fil_para.isalpha()):
                     raise TypeError
                 else:
@@ -72,10 +68,8 @@ def get_filters():
     if fil_para != 'day':
         while True:
             try:
-                month = input('Which month\'s data would you love to explore? Jan, Feb, Mar, Apr, May, Jun or all: ')
-                if month.lower() in mon_lst:
-                    month = month.lower()
-                else:
+                month = input('Which month\'s data would you love to explore? Jan, Feb, Mar, Apr, May, Jun or all: ').lower()
+                if month not in mon_lst:
                     if(not month.isalpha()):
                         raise TypeError
                     else:
@@ -92,10 +86,8 @@ def get_filters():
     if fil_para != 'month':
         while True:
             try:
-                day = input('Which day\'s data would you love to explore? Mon, Tue, Wed, Thu, Fri, Sat, Sun or all: ')
-                if day.lower() in day_lst:
-                    day = day.lower()
-                else:
+                day = input('Which day\'s data would you love to explore? Mon, Tue, Wed, Thu, Fri, Sat, Sun or all: ').lower()
+                if day not in day_lst:
                     if(not day.isalpha()):
                         raise TypeError
                     else:
@@ -133,6 +125,7 @@ def load_data(city, month, day,fil_para):
     
     ## Perform some feature Engineering on missing data set and
     # TO DO: Excluding washington data set because Gender and birth year column are not present 
+    
     if city != "washington":
         while (df_city['Birth Year'].isnull().sum() != 0):
             df_city['Birth Year'].interpolate(inplace=True) 
@@ -145,32 +138,26 @@ def load_data(city, month, day,fil_para):
     df_city['day_rec'] = df_city['Start Time'].dt.weekday
     df_city['hour_rec'] = df_city['Start Time'].dt.hour
     
+    
     # TO DO: Excluding washington data set because Gender and birth year column are not present   
+    
     if city != "washington":
         df_city['Birth Year'] = df_city[['Birth Year']].astype(int)
     
-
-    # Confirming the parameter to filter by
-    if fil_para == 'both':
-        # Applying the month filter parameter
-        if month != 'all':
+    if fil_para == 'both':                                     # Confirming the parameter to filter by
+        if month != 'all':                                     # Applying the month filter parameter
             month = mon_lst.index(month) + 1
             df_city = df_city[df_city['month_rec'] == month]
-
-        # Applying the day filter parameter
-        if day != 'all':
-            #print(mon_lst.index(month) + 1)
+            
+        if day != 'all':                                       # Applying the day filter parameter
             day = day_lst.index(day)
             df_city = df_city[df_city['day_rec'] == day]
-    elif fil_para == 'month':
-        # Applying the month filter parameter
+    elif fil_para == 'month':                                  # Applying the month filter parameter
         if month != 'all':
             month = mon_lst.index(month) + 1
             df_city = df_city[df_city['month_rec'] == month]
-    else:
-        # Applying the day filter parameter
+    else:                                                      # Applying the day filter parameter
         if day != 'all':
-            #print(mon_lst.index(month) + 1)
             day = day_lst.index(day)
             df_city = df_city[df_city['day_rec'] == day]
             
@@ -272,7 +259,7 @@ def trip_duration_stats(df_city,city, month, day,fil_para):
 
 
     
-def user_stats(df_city,city, month, day,fil_para):   
+def user_stats(df_city, city, month, day, fil_para):   
     """Displays statistics on bikeshare users."""
 
     print('\nCalculating User Stats...\n')
@@ -281,7 +268,6 @@ def user_stats(df_city,city, month, day,fil_para):
     
     # TO DO: Display counts of user types
 
-    #df_k = df_city['User Type'].mode()[0]
     df_k = df_city['User Type'].value_counts()
     df_k = df_k.to_frame()
 
@@ -333,7 +319,12 @@ def display_data(df_city):
     df_city.rename(columns={'Unnamed: 0':'Customer ID'}, inplace=True)
     df_city['Start Time'] = df_city['Start Time'] .astype(str)
     
+<<<<<<< HEAD
     # 
+||||||| eafcd2b
+=======
+    # While loop to display 5 rows of datasets to the user
+>>>>>>> refactoring
     view_display = input("Would you like to view 5 rows of individual trip data? Enter yes or no?").lower()
     start_loc = 0
     while (view_display == "yes"):
