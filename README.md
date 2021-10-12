@@ -3,8 +3,11 @@
 ### Date created
 Include the date you created this project and README file.
 
+This project was initially created on the 16-September-2021 but further modification began on the 11-October-2021.
+This README file was created on the 11-October-2021 as a documentation guide to the project.
+
 ### Project Title
-Replace the Project Title
+US Bikeshare Data Explorer
 
 ### Description
 Describe what your project is about and what it does
