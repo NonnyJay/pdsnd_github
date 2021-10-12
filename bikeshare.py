@@ -14,7 +14,9 @@ fil_lst = ['month', 'day','both']
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
-
+    A valid month can only be passed as three(3) character abbreviation or all
+    A valid day of the week can only be passed as three(3) character abbreviation or all
+    
     Returns:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
@@ -115,6 +117,9 @@ def load_data(city, month, day,fil_para):
     Loads data for the specified city 
     Perform some feature engineering to correct missing values in Gender and Birth Year columns
     and filters by month and day if applicable.
+    
+    Gender and Birth year column is not present on Washington dataset. Hence no analytic information
+    is displayed for those values when analyzing Washington dataset.
 
     Args:
         (str) city - name of the city to analyze
@@ -324,6 +329,7 @@ def display_data(df_city):
     df_city.rename(columns={'Unnamed: 0':'Customer ID'}, inplace=True)
     df_city['Start Time'] = df_city['Start Time'] .astype(str)
     
+    # 
     view_display = input("Would you like to view 5 rows of individual trip data? Enter yes or no?").lower()
     start_loc = 0
     while (view_display == "yes"):
