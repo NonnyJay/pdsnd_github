@@ -180,7 +180,9 @@ def load_data(city, month, day,fil_para):
 
 
 def time_stats(df_city,city, month, day,fil_para):
-    """Displays statistics on the most frequent times of travel."""
+    """Displays statistics on the most frequent times of travel.
+       As an enhancement to the template, least frequent times of travel was included
+    """
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
@@ -210,7 +212,9 @@ def time_stats(df_city,city, month, day,fil_para):
 
 
 def station_stats(df_city,city, month, day,fil_para):
-    """Displays statistics on the most popular stations and trip."""
+    """Displays statistics on the most popular stations and trip.
+       Displayed response uses input filter data, hence must be passed
+    """
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
