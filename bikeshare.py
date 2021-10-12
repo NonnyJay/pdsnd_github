@@ -125,6 +125,7 @@ def load_data(city, month, day,fil_para):
     
     ## Perform some feature Engineering on missing data set and
     # TO DO: Excluding washington data set because Gender and birth year column are not present 
+    
     if city != "washington":
         while (df_city['Birth Year'].isnull().sum() != 0):
             df_city['Birth Year'].interpolate(inplace=True) 
@@ -137,32 +138,26 @@ def load_data(city, month, day,fil_para):
     df_city['day_rec'] = df_city['Start Time'].dt.weekday
     df_city['hour_rec'] = df_city['Start Time'].dt.hour
     
+    
     # TO DO: Excluding washington data set because Gender and birth year column are not present   
+    
     if city != "washington":
         df_city['Birth Year'] = df_city[['Birth Year']].astype(int)
     
-
-    # Confirming the parameter to filter by
-    if fil_para == 'both':
-        # Applying the month filter parameter
-        if month != 'all':
+    if fil_para == 'both':                                     # Confirming the parameter to filter by
+        if month != 'all':                                     # Applying the month filter parameter
             month = mon_lst.index(month) + 1
             df_city = df_city[df_city['month_rec'] == month]
-
-        # Applying the day filter parameter
-        if day != 'all':
-            #print(mon_lst.index(month) + 1)
+            
+        if day != 'all':                                       # Applying the day filter parameter
             day = day_lst.index(day)
             df_city = df_city[df_city['day_rec'] == day]
-    elif fil_para == 'month':
-        # Applying the month filter parameter
+    elif fil_para == 'month':                                  # Applying the month filter parameter
         if month != 'all':
             month = mon_lst.index(month) + 1
             df_city = df_city[df_city['month_rec'] == month]
-    else:
-        # Applying the day filter parameter
+    else:                                                      # Applying the day filter parameter
         if day != 'all':
-            #print(mon_lst.index(month) + 1)
             day = day_lst.index(day)
             df_city = df_city[df_city['day_rec'] == day]
             
