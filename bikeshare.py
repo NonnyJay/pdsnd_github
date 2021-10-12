@@ -319,7 +319,17 @@ def display_data(df_city):
     df_city.rename(columns={'Unnamed: 0':'Customer ID'}, inplace=True)
     df_city['Start Time'] = df_city['Start Time'] .astype(str)
     
+<<<<<<< HEAD
     # While loop to display 5 rows of datasets to the user
+||||||| eafcd2b
+=======
+<<<<<<< HEAD
+    # 
+||||||| eafcd2b
+=======
+    # While loop to display 5 rows of datasets to the user
+>>>>>>> refactoring
+>>>>>>> master
     view_display = input("Would you like to view 5 rows of individual trip data? Enter yes or no?").lower()
     start_loc = 0
     while (view_display == "yes"):
