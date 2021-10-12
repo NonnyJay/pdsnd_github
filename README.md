@@ -11,6 +11,12 @@ US Bikeshare Data Explorer
 
 ### Description
 Describe what your project is about and what it does
+This Python project is use for Data analytic of US bikesharing services for three(3) states.
+1. To successfully run this project you need to have the data file (.csv) in the same folder with the scripts
+2. No installation is needed and can run on any Python 2.9 version and above
+3. This is free program: you can redistribute it and/or modify it under the terms of the GNU General Public License 
+as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
 
 ### Files used
 Include the files used
